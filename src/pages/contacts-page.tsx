@@ -50,7 +50,11 @@ const ContactsPage: React.FC = () => {
 
   return (
     <div className="contacts-page-container">
-    <header className="contacts-page-header">Header</header>
+    <header className="contacts-page-header">
+        <div className="contacts-page-header--stack">CSS, Javascript, API</div>
+        <div className="contacts-page-header--title">Contacts Application</div>
+        <div className="contacts-page-header--description">View basic info of contacts in a 3x2 layout. Click on the magnifier icon to open a modal and view detailed contact info contact</div>
+    </header>
     <main className="contacts-page-cards-container">
     {cardData.map((data, index) => (
         <div className="contacts-page-card">
@@ -58,7 +62,7 @@ const ContactsPage: React.FC = () => {
         </div>
       ))}
     </main>
-    <footer className="contacts-page-footer">Footer</footer>
+    <footer className="contacts-page-footer">Challenge by <a target="blank" href="https://www.speedcast.com/">Speedcast</a></footer>
   </div>
   );
 };
