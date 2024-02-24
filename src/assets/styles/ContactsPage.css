@@ -50,6 +50,7 @@
   flex-direction: row;
   font-weight: 200;
   font-size: small;
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
