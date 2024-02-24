@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/card-component";
 import axios from "axios";
-import '../assets/styles/ContactsPage.css';
+import "../assets/styles/ContactsPage.css";
 
 interface CardData {
   name: string;
@@ -20,7 +20,7 @@ const ContactsPage: React.FC = () => {
         const data = response.data.map((user: any) => ({
           name: user.name,
           email: user.email,
-          company: user.company?.name
+          company: user.company?.name,
         }));
         setCardData(data);
       })
@@ -50,20 +50,33 @@ const ContactsPage: React.FC = () => {
 
   return (
     <div className="contacts-page-container">
-    <header className="contacts-page-header">
+      <header className="contacts-page-header">
         <div className="contacts-page-header--stack">CSS, Javascript, API</div>
         <div className="contacts-page-header--title">Contacts Application</div>
-        <div className="contacts-page-header--description">View basic info of contacts in a 3x2 layout. Click on the magnifier icon to open a modal and view detailed contact info contact</div>
-    </header>
-    <main className="contacts-page-cards-container">
-    {cardData.map((data, index) => (
-        <div className="contacts-page-card">
-        <Card key={index} name={data.name} email={data.email} company={data.company} />
+        <div className="contacts-page-header--description">
+          View basic info of contacts in a 3x2 layout. Click on the magnifier
+          icon to open a modal and view detailed contact info contact
         </div>
-      ))}
-    </main>
-    <footer className="contacts-page-footer">Challenge by <a target="blank" href="https://www.speedcast.com/">Speedcast</a></footer>
-  </div>
+      </header>
+      <main className="contacts-page-cards-container">
+        {cardData.map((data, index) => (
+          <div className="contacts-page-card">
+            <Card
+              key={index}
+              name={data.name}
+              email={data.email}
+              company={data.company}
+            />
+          </div>
+        ))}
+      </main>
+      <footer className="contacts-page-footer">
+        Challenge by{" "}
+        <a target="blank" href="https://www.speedcast.com/">
+          Speedcast
+        </a>
+      </footer>
+    </div>
   );
 };
 

@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fafafa;
   gap: 2rem;
+  padding: 2rem;
 }
 
 .contacts-page-header,
@@ -13,19 +13,21 @@
   gap: 0.3125rem;
   text-align: center;
   flex-direction: column;
-  width: 30%;
+  width: 33%;
 }
 
 .contacts-page-cards-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  font-size: 15px;
 }
 
 .contacts-page-card {
   width: calc(50% - 10px);
-  border: 1px solid #ddd;
-  padding: 1.25rem;
+  margin: 1rem;
+  display: flex;
+  flex-grow: 1;
 }
 
 .contacts-page-header--stack {
@@ -59,5 +61,6 @@
 @media (min-width: 992px) {
   .contacts-page-card {
     width: calc(25% - 0.625rem);
+    flex-grow: 0;
   }
 }
