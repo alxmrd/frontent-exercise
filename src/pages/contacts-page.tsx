@@ -2,18 +2,42 @@ import React, { useEffect, useState } from "react";
 import Card from "../components/card-component";
 import axios from "axios";
 import "../assets/styles/ContactsPage.css";
+import Modal from "../components/modal-component";
+import Spinner from "../components/spinner";
 
 interface CardData {
   name: string;
   email: string;
   company: string;
+  address: string;
+  username: string;
+  website: string;
+  phone: string;
+  addressCity: string;
+  addressStreet: string;
+  addressSuite: string;
 }
 
 const ContactsPage: React.FC = () => {
   const [cardData, setCardData] = useState<CardData[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
+    null,
+  );
+
+  const handleCardClick = (index: number) => {
+    setSelectedCardIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get("https://jsonplaceholder.typicode.com/users?_start=0&_limit=6")
       .then((response) => {
@@ -21,6 +45,12 @@ const ContactsPage: React.FC = () => {
           name: user.name,
           email: user.email,
           company: user.company?.name,
+          username: user.username,
+          website: user.website,
+          phone: user.phone,
+          addressCity: user.address?.city,
+          addressStreet: user.address?.street,
+          addressSuite: user.address?.suite,
         }));
         setCardData(data);
       })
@@ -45,6 +75,9 @@ const ContactsPage: React.FC = () => {
         } else {
           setError("Error setting up request");
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -58,18 +91,38 @@ const ContactsPage: React.FC = () => {
           icon to open a modal and view detailed contact info contact
         </div>
       </header>
-      <main className="contacts-page-cards-container">
-        {cardData.map((data, index) => (
-          <div className="contacts-page-card">
-            <Card
-              key={index}
-              name={data.name}
-              email={data.email}
-              company={data.company}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <main className="contacts-page-cards-container">
+          {cardData.map((data, index) => (
+            <div className="contacts-page-card" key={index}>
+              <Card
+                name={data.name}
+                email={data.email}
+                company={data.company}
+                onIconClick={() => handleCardClick(index)}
+              />
+            </div>
+          ))}
+          {isModalOpen && selectedCardIndex !== null && (
+            <Modal
+              name={cardData[selectedCardIndex].name}
+              email={cardData[selectedCardIndex].email}
+              company={cardData[selectedCardIndex].company}
+              username={cardData[selectedCardIndex].username}
+              website={cardData[selectedCardIndex].website}
+              phone={cardData[selectedCardIndex].phone}
+              addressCity={cardData[selectedCardIndex].addressCity}
+              addressStreet={cardData[selectedCardIndex].addressStreet}
+              addressSuite={cardData[selectedCardIndex].addressSuite}
+              isOpen={isModalOpen}
+              onClose={handleCloseModal}
             />
-          </div>
-        ))}
-      </main>
+          )}
+        </main>
+      )}
+
       <footer className="contacts-page-footer">
         Challenge by{" "}
         <a target="blank" href="https://www.speedcast.com/">

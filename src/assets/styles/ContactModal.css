@@ -1,0 +1,97 @@
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-header {
+  background-color: #fafafa;
+  width: auto;
+  padding: 20px;
+  color: #444c5c;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.modal-card {
+  background-color: white;
+  font-size: 15px;
+  border-bottom: 2px solid #33cccc;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-title {
+  font-weight: 600;
+  font-size: large;
+}
+
+.modal-description {
+  font-weight: 400;
+  font-size: small;
+}
+
+.modal-description-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content {
+  display: flex;
+  text-align: start;
+  font-weight: 600;
+  gap: 3rem;
+  padding: 20px 40px;
+  color: #3c4252;
+  flex-direction: column;
+}
+
+.modal-content * span {
+  font-weight: 400;
+  font-size: small;
+}
+
+.modal-description-web > div {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-content {
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+}
